@@ -1,0 +1,241 @@
+@import url("https://googleapis.com");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* பக்கத்தை ஒரே திரைக்குள் அடைப்பதற்கான முக்கிய திருத்தம் */
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* ஸ்க்ரோல்பார் முற்றிலும் தடுக்கப்படும் */
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+/* ==========================
+   MAIN PAGE
+========================== */
+.error-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 16px;
+  overflow: hidden;
+  background: #e7eff7;
+  border-top: 6px solid #fff1a8;
+}
+
+.error-card {
+  width: 100%;
+  max-width: 760px;
+  max-height: 95vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  animation: pageEnter 0.8s ease both;
+}
+
+/* ==========================
+   404 HEADING
+========================== */
+.error-heading {
+  margin-bottom: 5px;
+}
+
+.error-heading h1 {
+  font-size: clamp(60px, 8vw, 90px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -3px;
+  color: #0788cc;
+  text-shadow: 0 4px 0 rgba(0, 85, 150, 0.1);
+}
+
+.error-heading p {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #252936;
+  margin-top: 4px;
+}
+
+/* ==========================
+   SVG SCENE
+========================== */
+.scene-wrapper {
+  width: 100%;
+  max-width: 580px;
+  margin: 10px auto;
+}
+
+.error-scene {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 38vh;
+  overflow: visible;
+}
+
+.computer,
+.server {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+
+.monkey {
+  transform-box: view-box;
+  transform-origin: 420px 285px;
+}
+
+/* ==========================
+   WIRES & ELECTRICITY
+========================== */
+.wire {
+  fill: none;
+  stroke: #293b49;
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.current {
+  fill: none;
+  stroke: #00c8ff;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 12 20;
+  stroke-dashoffset: 32;
+  opacity: 0;
+  filter: drop-shadow(0 0 5px #00c8ff);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wire-end {
+  fill: #00c8ff;
+  stroke: #ffffff;
+  stroke-width: 2;
+  opacity: 0;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================
+   PHASE STYLES
+========================== */
+.phase-connect .computer { animation: deviceConnect 0.7s ease; }
+.phase-connect .server { animation: deviceConnect 0.7s ease; }
+
+.phase-current .current { opacity: 1; animation: electricFlow 0.35s linear infinite; }
+.phase-current .wire-end { opacity: 1; animation: terminalGlow 0.7s ease-in-out infinite alternate; }
+.phase-current .connection-sparks { opacity: 1; animation: sparkFlicker 0.25s steps(2) infinite; }
+
+.phase-shock .monkey { animation: monkeyShock 0.12s linear infinite; }
+.phase-shock .shock-sparks { opacity: 1; animation: sparkFlicker 0.18s steps(2) infinite; }
+.phase-shock .current { opacity: 1; animation: electricFlow 0.18s linear infinite; }
+.phase-shock .wire-end { opacity: 1; animation: terminalGlow 0.2s ease-in-out infinite alternate; }
+
+.phase-disconnect .monkey { animation: monkeyRecover 0.7s ease; }
+.phase-disconnect .disconnect-sparks { opacity: 1; animation: sparkFlicker 0.25s steps(2) infinite; }
+
+.phase-rest .monkey { animation: monkeyRest 0.7s ease; }
+
+/* ஷாக் அனிமேஷனுக்கான விசேஷ முகம்/எலும்புக்கூடு அடுக்குகள் */
+.scream-mouth, .scream-tongue, .xray-skeleton { opacity: 0; }
+.phase-shock .monkey-eye, .phase-shock .monkey-mouth, .phase-shock ellipse[fill="#e9b78b"] { opacity: 0; }
+.phase-shock .scream-mouth, .phase-shock .scream-tongue, .phase-shock .xray-skeleton { opacity: 1; }
+
+/* ==========================
+   STATUS TEXT
+========================== */
+.animation-status {
+  min-height: 25px;
+  margin-top: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.status-connect { color: #4f6579; }
+.status-current { color: #008fc7; animation: textGlow 0.7s ease-in-out infinite alternate; }
+.status-shock { color: #e08b16; animation: textShake 0.15s linear infinite; }
+.status-disconnect { color: #e56d37; }
+.status-rest { color: #6e7784; }
+
+/* ==========================
+   CONTENT & BUTTON
+========================== */
+.error-content {
+  margin-top: 10px;
+}
+
+.error-content h2 {
+  font-size: clamp(18px, 2.5vw, 22px);
+  font-weight: 700;
+  color: #252936;
+  margin-bottom: 5px;
+}
+
+.error-content p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #6c7684;
+  margin-bottom: 15px;
+  max-width: 600px;
+}
+
+.home-button {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  background: #0788cc;
+  color: white;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(7, 136, 204, 0.2);
+  transition: all 0.3s ease;
+}
+
+.home-button:hover {
+  background: #056da6;
+  transform: translateY(-2px);
+}
+
+/* ==========================
+   KEYFRAME ANIMATIONS
+========================== */
+@keyframes pageEnter { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes deviceConnect { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes electricFlow { from { stroke-dashoffset: 32; } to { stroke-dashoffset: 0; } }
+@keyframes terminalGlow { from { opacity: 0.4; } to { opacity: 1; } }
+@keyframes sparkFlicker { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
+@keyframes textGlow { from { text-shadow: 0 0 0 transparent; } to { text-shadow: 0 0 8px rgba(0, 200, 255, 0.3); } }
+@keyframes textShake { 0% { transform: translateX(-1px); } 100% { transform: translateX(1px); } }
+
+@keyframes monkeyShock {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-3px, -1px) rotate(-1deg); }
+  50% { transform: translate(3px, 1px) rotate(1deg); }
+  75% { transform: translate(-2px, 1px) rotate(0deg); }
+  100% { transform: translate(2px, -1px) rotate(0deg); }
+}
+
+@keyframes monkeyRecover { 0% { transform: rotate(-2deg); } 40% { transform: rotate(2deg); } 100% { transform: rotate(0); } }
+@keyframes monkeyRest { from { transform: translateY(-2px); } to { transform: translateY(0); } }
+
+@media (max-width: 600px) {
+  .error-page { padding: 10px; }
+  .error-heading h1 { font-size: 55px; }
+  .home-button { width: 100%; }
+}
