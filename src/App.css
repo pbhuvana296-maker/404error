@@ -239,3 +239,120 @@ body {
   .error-heading h1 { font-size: 55px; }
   .home-button { width: 100%; }
 }
+
+/* =========================================
+   DISCONNECTED WIRES FALL DOWN
+========================================= */
+
+.monkey-wire-left,
+.monkey-wire-right {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* LEFT WIRE FALL */
+
+.wire-fall-left {
+  animation: wireFallLeft 1.2s ease-in forwards;
+}
+
+@keyframes wireFallLeft {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+
+  15% {
+    transform: translate(-2px, 8px) rotate(-2deg);
+    opacity: 1;
+  }
+
+  35% {
+    transform: translate(-8px, 30px) rotate(-7deg);
+    opacity: 1;
+  }
+
+  55% {
+    transform: translate(-15px, 60px) rotate(-13deg);
+    opacity: 0.95;
+  }
+
+  75% {
+    transform: translate(-25px, 100px) rotate(-20deg);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translate(-40px, 155px) rotate(-30deg);
+    opacity: 0;
+  }
+}
+
+
+/* RIGHT WIRE FALL */
+
+.wire-fall-right {
+  animation: wireFallRight 1.2s ease-in forwards;
+}
+
+@keyframes wireFallRight {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+
+  15% {
+    transform: translate(2px, 8px) rotate(2deg);
+    opacity: 1;
+  }
+
+  35% {
+    transform: translate(8px, 30px) rotate(7deg);
+    opacity: 1;
+  }
+
+  55% {
+    transform: translate(15px, 60px) rotate(13deg);
+    opacity: 0.95;
+  }
+
+  75% {
+    transform: translate(25px, 100px) rotate(20deg);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translate(40px, 155px) rotate(30deg);
+    opacity: 0;
+  }
+}
+
+
+/* =========================================
+   DISCONNECT SPARKS
+========================================= */
+
+.disconnect-sparks {
+  opacity: 0;
+}
+
+.phase-disconnect .disconnect-sparks {
+  animation: disconnectSpark 0.7s ease-out forwards;
+}
+
+@keyframes disconnectSpark {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
